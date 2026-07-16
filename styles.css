@@ -1,0 +1,219 @@
+
+    /* Estilos Generales */
+    * {
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #fff0f5; /* Fondo rosa claro */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Altura completa de la ventana */
+      overflow: hidden; /* Evita barras de desplazamiento si el botón se mueve fuera del borde */
+    }
+
+    /* Contenedor Principal */
+    .container {
+      background: white;
+      border: 2px solid #ffb6c1; /* Borde rosa */
+      border-radius: 12px;
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255, 0, 128, 0.2); /* Sombra rosa suave */
+      position: relative;
+    }
+
+    h1 {
+      color: #e91e63; /* Rosa más oscuro para el encabezado */
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #444; /* Gris oscuro para el texto */
+      margin-bottom: 30px; /* Más espacio debajo del párrafo */
+      line-height: 1.5; /* Mejora la legibilidad */
+    }
+
+    /* Contenedor de Botones */
+    .buttons {
+      display: flex;
+      justify-content: center; /* Centra los botones horizontalmente */
+      gap: 20px; /* Espacio entre botones */
+      height: 60px; /* Altura fija para un diseño consistente */
+      margin-top: 20px;
+      position: relative; /* CRUCIAL: Esto lo convierte en el contexto de posicionamiento para el botón 'No' */
+      overflow: hidden; /* Oculta partes del botón 'No' que podrían moverse temporalmente fuera de sus límites */
+    }
+
+    /* Estilo Base del Botón 'Sí' */
+    #yesBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      font-weight: bold;
+      width: 100px; /* Ancho fijo */
+      background-color: #4caf50; /* Verde */
+      color: white;
+      z-index: 1; /* Asegura que el botón 'Sí' sea clickeable */
+    }
+
+    #yesBtn:hover {
+        background-color: #45a049;
+    }
+
+    /* Botón 'No' (ahora un div) - MODIFICADO para agilidad extrema */
+    #noBtn {
+      background-color: #f44336; /* Rojo */
+      color: white;
+      position: absolute; /* Permite el movimiento */
+      top: 0;
+      left: 0;
+      z-index: 2; /* Asegura que el botón 'No' esté encima del 'Sí' si se superponen durante el movimiento */
+      transition: all 0.001s linear; /* Movimiento CASI INSTANTÁNEO */
+      padding: 10px 20px; /* Mismo padding para tamaño visual */
+      font-size: 16px; /* Mismo tamaño de fuente */
+      border-radius: 6px; /* Mismo radio de borde */
+      font-weight: bold; /* Mismo peso de fuente */
+      width: 100px; /* Ancho fijo para tamaño igual */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: none; /* Hace que el cursor desaparezca cuando está sobre él - ¡lo último para que no sea clickeable! */
+      user-select: none; /* Evita la selección de texto */
+      pointer-events: none; /* Ignora todos los eventos del mouse en el div mismo */
+    }
+
+    #noBtn:hover {
+        background-color: #da190b; /* Todavía tiene un estado hover, pero debería ser difícil de alcanzar */
+    }
+
+    /* Reproductor de Audio */
+    audio {
+      margin-top: 30px;
+      width: 100%;
+      outline: none;
+    }
+
+    /* Superposición Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Contenido Modal */
+    .modal-content {
+      background: white;
+      border: 2px solid #ffb6c1;
+      border-radius: 12px;
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
+      animation: fadeIn 0.3s ease-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Estilo de la Flecha de Retroceso (para el modal) */
+    #backArrow {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 24px;
+      color: #e91e63;
+      cursor: pointer;
+      z-index: 10;
+      text-decoration: none;
+      display: block;
+      padding: 5px;
+    }
+
+    #backArrow:hover {
+        color: #d81b60;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* El texto de 'respuesta' */
+    #respuesta {
+      font-size: 28px;
+      color: #d81b60;
+      margin-bottom: 25px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    /* Estos elementos se eliminan o su visualización se establece en 'none' */
+    #imagenRespuesta,
+    .hojita,
+    #regresarBtn {
+      display: none;
+    }
+
+    .rosa-final {
+      width: 120px;
+      margin: 0 auto;
+      margin-bottom: 0;
+      display: block;
+    }
+
+    /* Ajustes responsivos para pantallas más pequeñas */
+    @media (max-width: 500px) {
+        .container, .modal-content {
+            padding: 20px;
+            width: 95%;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 14px;
+        }
+        button {
+            padding: 8px 15px;
+            font-size: 14px;
+            width: 90px;
+        }
+        #respuesta {
+            font-size: 22px;
+        }
+        .rosa-final {
+            width: 100px;
+        }
+        #backArrow {
+            font-size: 20px;
+            top: 10px;
+            left: 10px;
+        }
+        #noBtn {
+            width: 90px;
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+    }
+  
